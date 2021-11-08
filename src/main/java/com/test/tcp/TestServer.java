@@ -15,7 +15,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 public class TestServer {
 
     public static void main(String[] args) throws InterruptedException {
-        EventLoopGroup bossGroup  = new NioEventLoopGroup();//线程，用来接收  事件循环组  死循环
+        EventLoopGroup bossGroup  = new NioEventLoopGroup(1);//线程，用来接收  事件循环组  死循环
         EventLoopGroup workerGroup = new NioEventLoopGroup();//线程，用来处理  事件循环组  死循环
 
         try{
