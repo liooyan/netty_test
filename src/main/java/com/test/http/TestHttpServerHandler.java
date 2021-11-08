@@ -1,4 +1,4 @@
-package com.test;
+package com.test.http;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -73,5 +73,10 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         System.out.println("handler added");
         super.handlerAdded(ctx);
+    }
+
+    @Override
+    public boolean isSharable() {
+        return true;
     }
 }
