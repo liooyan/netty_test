@@ -56,6 +56,12 @@ public class TestTcpServerHandler extends SimpleChannelInboundHandler<Object> {
         super.channelUnregistered(ctx);
     }
 
+    /**
+     * 在handler 添加到管道时，调用
+     *
+     * @param ctx
+     * @throws Exception
+     */
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         System.out.println("handler added");
