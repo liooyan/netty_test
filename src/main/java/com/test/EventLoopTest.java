@@ -1,6 +1,7 @@
 package com.test;
 
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.ScheduledFuture;
 
 import java.util.concurrent.TimeUnit;
@@ -24,11 +25,20 @@ public class EventLoopTest {
         boolean success = schedule.isDone();
         System.out.println(success);
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        Future<String> submit = nioEventLoopGroup.submit(() -> {
+            System.out.println("aaaaaa");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("bbbbb");
+            return "liyan";
+        });
+        submit.addListener(a -> System.out.println(a.get()));
+
+
         nioEventLoopGroup.execute(() ->{
             System.out.println(22222);
         });
