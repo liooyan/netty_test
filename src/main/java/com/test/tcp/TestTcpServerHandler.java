@@ -32,6 +32,11 @@ public class TestTcpServerHandler extends SimpleChannelInboundHandler<Object> {
         System.out.println("==========");
     }
 
+    /**
+     * 激活后调用，一般就在channelRegistered 方法后面
+     * @param ctx
+     * @throws Exception
+     */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channel active");
@@ -44,6 +49,12 @@ public class TestTcpServerHandler extends SimpleChannelInboundHandler<Object> {
         super.channelInactive(ctx);
     }
 
+    /**
+     * 在向selector注册成功后调用
+     *
+     * @param ctx
+     * @throws Exception
+     */
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channel registered");
