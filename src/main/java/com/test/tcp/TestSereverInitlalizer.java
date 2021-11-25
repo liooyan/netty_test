@@ -13,13 +13,15 @@ import io.netty.handler.codec.http.HttpServerCodec;
 public class TestSereverInitlalizer extends ChannelInitializer<SocketChannel> {
 
 
+    EventLoopGroup workerGroup = new NioEventLoopGroup();
+
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
 
         pipeline.addLast( new DelimiterBasedFrameDecoder(9045, Unpooled.copiedBuffer("\n".getBytes())));
 
-        pipeline.addLast("testHttpSereverHandle2", new TestTcpServerHandler2());//把前面设置的handler加到最后
+        pipeline.addLast(workerGroup,"testHttpSereverHandle2", new TestTcpServerHandler2());//把前面设置的handler加到最后
         pipeline.addLast("testHttpSereverHandle", new TestTcpServerHandler());//把前面设置的handler加到最后
         pipeline.addLast("TestTcpServerOutHandler", new TestTcpServerOutHandler());//把前面设置的handler加到最后
 
